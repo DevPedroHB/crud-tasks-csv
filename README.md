@@ -24,7 +24,7 @@
 Here are the technologies used in this project.
 
 - JavaScript (ECMAScript 2022)
-- NodeJS 18.13.0
+- NodeJS v18.13.0
 
 ## 📋 Services
 
