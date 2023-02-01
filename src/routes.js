@@ -110,4 +110,29 @@ export const routes = [
         .end(JSON.stringify({ message: "Task deleted successfully." }));
     },
   },
+  // Change task status by id
+  {
+    method: "PATCH",
+    path: buildRoutePath("/tasks/:id/toggle"),
+    handler: (req, res) => {
+      const { id } = req.params;
+
+      const [task] = database.select("tasks", { id });
+
+      if (!task) {
+        return res
+          .writeHead(404)
+          .end(JSON.stringify({ message: "There is no task with that id." }));
+      }
+
+      const isTaskCompleted = !!task.completed_at;
+      const completed_at = isTaskCompleted ? null : new Date();
+
+      database.update("tasks", id, { completed_at });
+
+      return res
+        .writeHead(200)
+        .end(JSON.stringify({ message: "Task status updated successfully." }));
+    },
+  },
 ];
