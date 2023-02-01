@@ -1,0 +1,22 @@
+{
+  "name": "crud-tasks-csv",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Node.js Fundamentals Module Challenge",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node streams/import-csv.js"
+  },
+  "keywords": [],
+  "author": "PedroHB",
+  "license": "MIT",
+  "dependencies": {
+    "csv-parse": "^5.3.3",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.33.0"
+  }
+}
