@@ -53,4 +53,39 @@ export const routes = [
       return res.end(JSON.stringify(tasks));
     },
   },
+  // Update a task by id
+  {
+    method: "PUT",
+    path: buildRoutePath("/tasks/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const { title, description } = req.body;
+
+      if (!title || !description) {
+        return res
+          .writeHead(400)
+          .end(
+            JSON.stringify({ message: "Title or description are required." })
+          );
+      }
+
+      const [task] = database.select("tasks", { id });
+
+      if (!task) {
+        return res
+          .writeHead(404)
+          .end(JSON.stringify({ message: "There is no task with that id." }));
+      }
+
+      database.update("tasks", id, {
+        title,
+        description,
+        updated_at: new Date(),
+      });
+
+      return res
+        .writeHead(200)
+        .end(JSON.stringify({ message: "Task updated successfully." }));
+    },
+  },
 ];
